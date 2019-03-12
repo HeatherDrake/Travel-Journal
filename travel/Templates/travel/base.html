@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <title>{% block title %}Travel Journal{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+ <header>
+     <div class="container">
+     <div class="hi">
+       {% if user.is_authenticated %}
+            <ul class="row pages">
+                <li class="col"><a href="{% url 'users:logout' %}">logout</a></li>
+            </ul>
+           Hi {{ user.username }}!
+         {% else %}
+           <ul class="row pages">
+               <li class="col"><a href="{% url 'users:login' %}">login</a></li>
+               <li class="col"><a href="{% url 'users:signup' %}">signup</a></li>
+           </ul>
+       {% endif %}
+     </div>
+    </div>
+ </header>
+ <main>
+<div>
+   {% block content %}
+
+   {% endblock %}
+ </div>
+ </main>
+</body>
+</html>

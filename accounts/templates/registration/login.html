@@ -1,0 +1,12 @@
+{% extends 'travel/base.html' %}
+{% load static %}
+{% block title %}Hello !{% endblock %}
+    {% block content %}
+     <h2>Login</h2>
+     <form method="post">
+       {% csrf_token %}
+         <input type="hidden" value="{% url 'yourdiaries' %}" name='next'>
+       {{ form.as_p }}
+       <button type="submit">Login</button>
+     </form>
+    {% endblock %}

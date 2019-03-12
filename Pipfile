@@ -10,6 +10,9 @@ django = "*"
 gunicorn = "*"
 whitenoise = "*"
 shell = "*"
+djangorestframework = "*"
+pillow = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"
