@@ -28,7 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'final-project-heather.herokuapp.com'
+    'final-project-heather.herokuapp.com',
+    '127.0.0.1',
 ]
 
 
