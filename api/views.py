@@ -23,12 +23,10 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
 
 class DiaryView(viewsets.ModelViewSet):
         authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
-        serializer_class =DiarySerializer
-
+        serializer_class = DiarySerializer
 
         def get_queryset(self):
             return DiaryUser.objects.filter(user=self.request.user)
-
 
         def perform_create(self, serializer):
             serializer.save(user=self.request.user)

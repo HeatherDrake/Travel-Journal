@@ -88,8 +88,15 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+if os.environ.get('DATABASE_URL'):
+    import dj_databases_url
 
-DATABASES = {
+    DATABASES ={
+        'default': dj_database_url.config(default=os.environ['DATABASE_URL'])
+    }
+else:
+
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'finalproject',
@@ -148,3 +155,6 @@ STATICFILES_FINDERS = [
 ]
 # ======== END STATIC FILE CONFIGURATION
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'frontend/static/build/static'),
+)

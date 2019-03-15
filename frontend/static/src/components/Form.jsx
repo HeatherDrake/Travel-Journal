@@ -5,35 +5,12 @@ class ImageUpload extends Component {
     super(props);
     this.state = {
         image: '',
-        imagePreviewUrl: ''
+        imagePreviewUrl: '',
+        blog: "testing testing testing "
     };
     this._handleImageChange= this._handleImageChange.bind(this)
+    this._handleSubmit= this._handleSubmit.bind(this)
   }
-
-  _handleSubmit(e) {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-    console.log('handle uploading-', this.state.file);
-
-
-
-  }
-
-  // _handleImageChange(e) {
-  //   e.preventDefault();
-  //
-  //   let reader = new FileReader();
-  //   let file = e.target.files[0];
-  //
-  //   reader.onloadend = () => {
-  //     this.setState({
-  //       file: file,
-  //       imagePreviewUrl: reader.result
-  //     });
-  //   }
-  //
-  //   reader.readAsDataURL(file)
-  // }
 
      _handleImageChange(event) {
 
@@ -43,15 +20,22 @@ class ImageUpload extends Component {
         fileReader.onloadend = () => this.setState({imagePreviewUrl: fileReader.result});
         fileReader.readAsDataURL(file);
         this.setState({image: file});
+        console.log("image", this.state.image)
 
+    }
+    handleBlogChange(event){
+      event.preventDefault();
+      this.setState({blog: event.target.value})
     }
 
 
-    submitImage(e) {
+     _handleSubmit(e) {
         e.preventDefault();
+        console.log('handle uploading-', this.state.image);
 
         let formData = new FormData();
         formData.append("image", this.state.image);
+        formData.append("blog", this.state.blog);
 
 
         const conf = {
@@ -61,18 +45,15 @@ class ImageUpload extends Component {
         };
 
 
-        fetch('/api/', conf).then((response) => {
+        fetch('/api/images/', conf).then((response) => {
             return response.json();
+            // console.log("working", JSON);
         }).then((json) => {
 
-            let imageCollection = [...this.state.imageCollection];
-            imageCollection.push(json);
+            this.setState({imagePreviewUrl: json});
+            console.log("working", json);
 
-
-            this.setState({imageCollection});
-            this.setState({image_preview: ""});
-
-            console.log('added', imageCollection);
+            // console.log('added', imagePreviewUrl);
         });
     };
 
@@ -87,19 +68,34 @@ class ImageUpload extends Component {
 
     return (
       <div className="previewComponent">
-        <form onSubmit={(e)=>this._handleSubmit(e)}>
+        <form onSubmit={this._handleSubmit}>
+
           <input className="fileInput"
             type="file"
-            onChange={(e)=>this._handleImageChange(e)} />
+            onChange={(e)=>this._handleImageChange(e)} /><br/>
+
+            <input name="blog" type='text' onChange={(e)=>this.handleBlogChange(e)} placeholder="Trip details"/><br/>
+
           <button className="submitButton"
             type="submit" >Upload Image</button>
         </form>
         <div className="imgPreview">
           {$imagePreview}
         </div>
+          <div>
+              <p>{this.state.blog}</p>
+
+          </div>
       </div>
     )
   }
 }
 
 export default ImageUpload;
+
+
+
+
+
+
+
