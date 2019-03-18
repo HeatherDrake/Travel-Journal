@@ -8,7 +8,8 @@ class ImageUpload extends Component {
     this.state = {
         image: '',
         imagePreviewUrl: null,
-        blog: ''
+        blog: '',
+        posts:[]
     };
     this._handleImageChange= this._handleImageChange.bind(this)
     this._handleSubmit= this._handleSubmit.bind(this)
@@ -52,7 +53,12 @@ class ImageUpload extends Component {
             // console.log("working", JSON);
         }).then((json) => {
 
-            this.setState({imagePreviewUrl: json});
+            this.setState({imagePreviewUrl: json.image});
+
+            var posts = this.state.posts
+            posts.push(json)
+
+            this.setState({posts: posts})
             console.log("working", json);
 
             console.log('post worked', );
@@ -60,6 +66,7 @@ class ImageUpload extends Component {
     };
 
   render() {
+      console.log(this.state.posts)
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
