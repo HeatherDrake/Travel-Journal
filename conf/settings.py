@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from os.path import normpath, join
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -47,11 +48,20 @@ INSTALLED_APPS = [
     'travel',
     'api',
     'accounts'
+]# UPLOADED FILE CONFIGURATION
 
 
+#  SEE: https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = 'finalprojectdiary'
+AWS_DEFAULT_ACL = None
+# # default will be to lock down
+AWS_S3_FILE_OVERWRITE = False
+# true is defult and will overwrite file names. Set to FALSE for files to upload and add numbers to the end of file to add repeats.
 
 
-]
 REACT_APP_DIR = 'frontend/static'
 
 MIDDLEWARE = [
