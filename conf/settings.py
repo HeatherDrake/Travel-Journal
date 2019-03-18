@@ -101,23 +101,22 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 if os.environ.get('DATABASE_URL'):
-    import dj_databases_url
-
     DATABASES ={
         'default': dj_database_url.config(default=os.environ['DATABASE_URL'])
     }
+
 else:
 
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'finalproject',
-        'USER': 'heatherdrake',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'finalproject',
+            'USER': 'heatherdrake',
+            'PASSWORD': '',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
     }
-}
 
 
 # Password validation
