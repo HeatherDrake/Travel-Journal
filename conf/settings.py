@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'travel',
     'api',
-    'accounts'
+    'accounts',
+    'storages',
+
 ]# UPLOADED FILE CONFIGURATION
 
 
@@ -168,3 +170,7 @@ STATICFILES_FINDERS = [
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/static/build/static'),
 )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/static/media')
+
+MEDIA_URL = '/media/'
