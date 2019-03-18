@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import './form.css';
+
 
 class ImageUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
         image: '',
-        imagePreviewUrl: '',
-        blog: "testing testing testing "
+        imagePreviewUrl: null,
+        blog: ''
     };
     this._handleImageChange= this._handleImageChange.bind(this)
     this._handleSubmit= this._handleSubmit.bind(this)
@@ -53,7 +55,7 @@ class ImageUpload extends Component {
             this.setState({imagePreviewUrl: json});
             console.log("working", json);
 
-            // console.log('added', imagePreviewUrl);
+            console.log('post worked', );
         });
     };
 
@@ -61,32 +63,30 @@ class ImageUpload extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
+      $imagePreview = (<img src={imagePreviewUrl} alt="imagePreview"/>);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
 
     return (
-      <div className="previewComponent">
-        <form onSubmit={this._handleSubmit}>
-
-          <input className="fileInput"
-            type="file"
-            onChange={(e)=>this._handleImageChange(e)} /><br/>
-
-            <input name="blog" type='text' onChange={(e)=>this.handleBlogChange(e)} placeholder="Trip details"/><br/>
-
-          <button className="submitButton"
-            type="submit" >Upload Image</button>
+        <form onSubmit={this._handleSubmit} id="uploadForm">
+            <div>
+                <input className="fileInput"
+                type="file"
+                onChange={(e)=>this._handleImageChange(e)} /><br/>
+            </div>
+            <div id='textAndButton'>
+                <input id="blogText" name="blog" type='text' onChange={(e)=>this.handleBlogChange(e)} placeholder="Trip details"/><br/>
+                <button className="submitButton"
+                type="submit">Upload Image</button>
+            </div>
+            <div className="imgPreview">
+                {$imagePreview}
+            </div>
+            <div>
+                <p>{this.state.blog}</p>
+            </div>
         </form>
-        <div className="imgPreview">
-          {$imagePreview}
-        </div>
-          <div>
-              <p>{this.state.blog}</p>
-
-          </div>
-      </div>
     )
   }
 }

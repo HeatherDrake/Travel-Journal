@@ -14,6 +14,7 @@ djangorestframework = "*"
 pillow = "*"
 psycopg2 = "*"
 dj-database-url = "*"
+djangorestframework-stubs = "*"
 
 [requires]
 python_version = "3.7"

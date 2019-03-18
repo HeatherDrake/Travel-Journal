@@ -6,5 +6,5 @@ from travel.models import DiaryUser
 class DiarySerializer(serializers.ModelSerializer):
     class Meta:
         model = DiaryUser
-        fields = '__all__'
+        fields = ('id', 'user', 'date', 'image', 'blog')
         depth = 1
