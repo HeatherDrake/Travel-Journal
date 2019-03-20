@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
-from travel.views import PublicTravelSite
+
+
+from travelviews import PublicTravelSite
 
 urlpatterns = [
-    path('blog/<int:pk>/', views.PublicTravelSite.as_view(), name="travelpublic_site")
+    path('blog/<int:pk>/', views.PublicTravelSite.as_view(), name="TravelPublicSite")
 ]
