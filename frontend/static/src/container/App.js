@@ -14,10 +14,27 @@ class App extends Component {
         this.addPost=this.addPost.bind(this);
     }
 
+    componentDidMount(){
+
+        fetch('/api/images/').then((response) => {
+            return response.json();
+            // console.log("working", JSON);
+        }).then((json) => {
+
+
+            this.setState({posts: json})
+            console.log("working", json);
+
+            console.log('post worked', );
+        });
+
+
+    }
+
     addPost(post) {
         let formData = new FormData();
         formData.append("image", post.image);
-        formData.append("blog", post.blog);
+        formData.append("caption", post.caption);
 
 
         const conf = {
@@ -44,10 +61,14 @@ class App extends Component {
 
   render() {
       let posts = this.state.posts.map(post=>{
+          console.log(post);
           return(
-              <div>I am a post</div>
+              <div key={post.id}>
+                  <p>{post.caption}</p>
+              </div>
           )
-      })
+      });
+
     return (
         <div className="App">
           <ImageUpload addPost={this.addPost}/>

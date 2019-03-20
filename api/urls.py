@@ -7,8 +7,5 @@ app_name = "api"
 
 
 urlpatterns = [
-
   path('images/', DiaryView.as_view({'get': 'list', 'post': 'create'})),
-
-
 ]

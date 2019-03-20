@@ -1,7 +1,8 @@
 from django.shortcuts import render
 
-from django.views.generic import TemplateView
+from django.views.generic import DetailView
+from .models import Blog
 
-
-# class AccountIndex(TemplateView):
-#     template_name = 'travel/yourdiaries.html'
+class PublicTravelSite(DetailView):
+    template_name = 'travel/public.html'
+    model = Blog

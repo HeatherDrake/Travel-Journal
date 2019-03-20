@@ -8,8 +8,7 @@ class ImageUpload extends Component {
     this.state = {
         image: '',
         imagePreviewUrl: null,
-        blog: '',
-        posts:[]
+        caption: '',
     };
     this._handleImageChange= this._handleImageChange.bind(this)
     this._handleSubmit= this._handleSubmit.bind(this)
@@ -28,42 +27,15 @@ class ImageUpload extends Component {
     }
     handleBlogChange(event){
       event.preventDefault();
-      this.setState({blog: event.target.value})
+      this.setState({caption: event.target.value})
     }
 
 
      _handleSubmit(e) {
-        e.preventDefault();
-        console.log('handle uploading-', this.state.image);
+         e.preventDefault();
+        this.props.addPost(this.state)
+     }
 
-        let formData = new FormData();
-        formData.append("image", this.state.image);
-        formData.append("blog", this.state.blog);
-
-
-        const conf = {
-            method: "POST",
-            body: formData,
-
-        };
-
-
-        fetch('/api/images/', conf).then((response) => {
-            return response.json();
-            // console.log("working", JSON);
-        }).then((json) => {
-
-            this.setState({imagePreviewUrl: json.image});
-
-            var posts = this.state.posts
-            posts.push(json)
-
-            this.setState({posts: posts})
-            console.log("working", json);
-
-            console.log('post worked', );
-        });
-    };
 
   render() {
       console.log(this.state.posts)
@@ -91,7 +63,7 @@ class ImageUpload extends Component {
                 {$imagePreview}
             </div>
             <div>
-                <p>{this.state.blog}</p>
+                <p>{this.state.caption}</p>
             </div>
         </form>
     )

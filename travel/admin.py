@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import DiaryUser
+from .models import Blog, Post
 
 # Register your models here.
-admin.site.register(DiaryUser)
+admin.site.register(Blog)
+admin.site.register(Post)

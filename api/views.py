@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 from rest_framework import viewsets
 from .serializers import DiarySerializer
-from travel.models import DiaryUser
+from travel.models import Blog, Post
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.response import Response
 
@@ -26,7 +26,9 @@ class DiaryView(viewsets.ModelViewSet):
         serializer_class = DiarySerializer
 
         def get_queryset(self):
-            return DiaryUser.objects.filter(user=self.request.user)
+            blog = Blog.objects.get(user=self.request.user)
+            return Post.objects.filter(blog=blog)
 
         def perform_create(self, serializer):
-            serializer.save(user=self.request.user)
+            blog = Blog.objects.get(user=self.request.user)
+            serializer.save(blog=blog)

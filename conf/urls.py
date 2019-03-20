@@ -8,7 +8,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', include('frontend.urls')),
     path('api/', include('api.urls')),
-    # path('', include('travel.urls')),
+    path('', include('travel.urls')),
 
 
 

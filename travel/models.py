@@ -5,9 +5,14 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class DiaryUser (models.Model):
+class Blog(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    bitly = models.CharField( max_length=255)
+
+
+class Post(models.Model):
+    blog = models.ForeignKey(Blog, related_name='posts', on_delete=models.CASCADE)
     date = models.DateField(auto_now=True)
     image = models.ImageField(blank=True, upload_to='media/')
-    blog = models.TextField(null=True, max_length=700)
+    caption = models.TextField(null=True, max_length=700)
 
